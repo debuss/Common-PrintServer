@@ -107,11 +107,11 @@ final class CommonPrintServerServer {
     void start() {
         CommonPrintServerLogger.log("Common-PrintServer Started");
 
-        /* Thanks to https://github.com/perwendel/spark/commit/e1b6144b63ef5346a35be3cffbf6f96134b4c784. */
-        port(4567, 4568);
+        port(4567);
 
         /* The classpath is different when running in Intelliji IDEA and from command line. */
         /* To avoid problems with secure method, check both files. */
+        /*
         File keystore_ide = new File(CommonPrintServer.class.getResource("/keystore/keystore.jks").getPath());
         File keystore_jar = new File("keystore/keystore.jks");
 
@@ -122,6 +122,7 @@ final class CommonPrintServerServer {
         } else {
             CommonPrintServerLogger.log("Unable to load the keystore file. Only HTTP request will be valid.");
         }
+        */
 
         enableCORS("*", "*", "*");
 

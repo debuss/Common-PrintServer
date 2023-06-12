@@ -12,8 +12,7 @@ java -jar Common-PrinterServer.jar
 
 Else, you can just double-click on the Common-PrinterServer.jar file, most of operating system should be able to open it.  
 
-If your operating system supports Java SystemTray then you should see the icon on your task bar, example on windows :  
-![Common-PrintServer icon](https://doc-cloudfront.common-services.com/sonice_etiquetage/wp-content/uploads/2016/08/Common-PrintServer-Barre-des-taches.jpg)
+If your operating system supports Java SystemTray then you should see the icon on your task bar.
 
 You can now go to : [http://localhost:4567/getPrinters](http://localhost:4567/getPrinters).  
 A list of your installed printers should be listed, example :  
@@ -21,13 +20,11 @@ A list of your installed printers should be listed, example :
 
 _Please not that the printer driver needs to be installed for the printer to be listed._
 
-You can check logs and errors in the Log menu from the TrayIcon :  
-![Log](https://doc-cloudfront.common-services.com/sonice_etiquetage/wp-content/uploads/2016/08/log.jpg)
+You can check logs and errors in the Log menu from the TrayIcon.
 
-## Ports
+## Port
 
-Common-PrintServer uses port **4567** for HTTP requests and **4568** for HTTPS requests.  
-Make sure they're available.
+Common-PrintServer uses port **4567** for HTTP requests, make sure it is available.
 
 ## API
 
@@ -43,14 +40,8 @@ In case of an error, the **error** index is filled with the error message and **
 
 ### Base URL
 
-All requests must be done on :
-* http::locahost:4567/
-* http::locahost:4568/
-
-depending on your website using HTTPS or not (see **Ports** upper).
-
-
-Therefore, to fetch a list of available printers you can call either `http://localhost:4567/getPrinters` or `https://localhost:4568/getPrinters`
+All requests must be done on : `http::locahost:4567/`.
+Therefore, to fetch a list of available printers you can call [http://localhost:4567/getPrinters](http://localhost:4567/getPrinters).
 
 ### `GET /getPrinters`
 
@@ -70,29 +61,19 @@ Set the selected printer to :name variable.
 
 ### `POST /printRaw`
 
-Send the raw code to the printer to print. Simply send the raw code to print in the request body.  
+Send the raw code to the printer to print. Simply send the raw code to print in the request body (`Content-Type: text/plain`).  
 Returns `{"response":"OK","error":""}` on success.
 
 ### `POST /printFileByURL`
 
-Send the document to print from URL to the printer to print. Simply send the URL of document to print in the request body.  
+Send the document to print from URL to the printer to print. Simply send the URL of document to print in the request body (`Content-Type: text/plain`).  
 Returns `{"response":"OK","error":""}` on success.
 
 ## HTTPS
 
-To deal with HTTPS request, made from HTTPS website, Common-PrintServer uses a self signed certificate.  
-Therefore, you need to add it to your allowed certificate, or go on this page from your browser :  [https://localhost:4568/getPrinters](https://localhost:4568/getPrinters).  
-
-Your browser will bloc the page for security reasons, add an exception to access the page anyway then you'll be able to deal
-with Common-PrintServer from HTTPS website on the client machine.
-
-Example with Firefox :
-
-![Firefox exception](https://doc-cloudfront.common-services.com/sonice_etiquetage/wp-content/uploads/2016/08/Firefox.jpg)
-
-Example with Chrome :
-
-![Chrome exception](https://www.dropbox.com/s/uqimj54z7vy4l1s/connexion_pas_priv%C3%A9e.png?raw=1)
+If you need HTTPS, please check the [Spark Java documentation](https://sparkjava.com/documentation#how-do-i-enable-sslhttps).  
+You can modify the file `src/main/java/commonprintserver/CommonPrintServerServer.java`, in the `start` method you'll find
+a commented section where you can implement SSL/HTTPS.
 
 ## Contributing
 
